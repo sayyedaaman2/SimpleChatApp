@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Chat App</title>
+</head>
+
+<body>
+    <div id="signup">
+        <label for="userName">UserName</label>
+        <input type="text" id="userName" value="" placeholder="Enter your alias">
+        <button type="button" name="button" onclick="setUserName()">Allow me to Chat !</button>
+    </div>
+    <div id="error-container"></div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        var socket = io();
+
+        function setUserName() {
+            let setUserName = document.getElementById('userName').value;
+            if(setUserName.length != 0){
+                socket.emit('setUserName', document.getElementById('userName').value);
+            }
+            else{
+                let errorContainer = document.getElementById("error-container");
+                errorContainer.innerHTML = '';
+                let div = document.createElement("div");
+                div.id = "inValidUserName";
+                div.innerHTML = `Please Enter the Name`
+                errorContainer.append(div);
+                errorContainer.style.display="block";
+            }
+        }
+        var user;
+
+        socket.on('userExists', function (data) {
+            let errorContainer = document.getElementById("error-container");
+            errorContainer.innerHTML = '';
+            let div = document.createElement("div");
+                div.id = "userExists";
+                div.innerHTML = data;
+                errorContainer.append(div);
+                errorContainer.style.display="block";
+
+        })
+        
+        socket.on('userAllowed', function (data) {
+            user = data.username;
+            document.body.innerHTML = `
+        <div id="message-container"> 
+            <div id="send-box">
+
+                <input type="text" id="message" value="" placeholder="Enter your message"> 
+                <button type="button" name="button" onclick="sendMessage()"> Send Message </button> 
+                
+            </div> 
+                <div id="message-box">
+
+                </div>
+        </div>`
+        });
+
+        function sendMessage() {
+            var msg = document.getElementById('message').value;
+            if (msg) {
+                socket.emit('msg', {
+                    message: msg,
+                    user: user
+                })
+            }
+        }
+
+        socket.on("newMessage", function (data) {
+            if (user) {
+                //document.getElementById('message-box').innerHTML += '<div><b>' + data.user + '</b>' +data.message + '</div>'
+
+                let messageContainer = document.getElementById("message-box");
+                let div = document.createElement("div");
+                div.className = "incomingMessage";
+                div.innerHTML = `<span class="userId"> ${data.user}</span> <span class="message"> ${data.message}</span> `
+                messageContainer.append(div);
+                messageContainer.style.display="block";
+            }
+        })
+
+    </script>
+</body>
+
+</html>
