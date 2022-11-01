@@ -8,9 +8,10 @@ body {
 #signup {
   box-sizing: border-box;
   border: 3px solid black;
-
-  margin: 10px 200px;
+  width: 80%;
   margin-top: 51px;
+  margin-left: auto;
+  margin-right: auto;
   padding: 20px 20px;
   display: flex;
   align-items: center;
@@ -167,4 +168,72 @@ body {
   font-weight: bold;
   position: absolute;
   right: 12px;
+}
+
+@media only screen and (max-width: 700px){
+  #signup {
+    min-width: 200px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto ;
+    text-align: center;
+  }
+  #signup label {
+    width: max-content;
+    font-size: 12px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto ;
+  }
+  #signup input {
+    width: 60%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto ;
+  }
+
+  #error-container {
+    width: 60%;
+    height:max-content ;
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    font-size :12px;
+    display: none;
+  }
+  #message-container {
+    min-width: 200px;
+    margin-left: auto;
+    margin-right: auto ;
+  }
+  #send-box {
+    min-width: 200px;
+    height: 100px;
+    padding: 0;
+    margin: 0;
+  }
+  #send-box input {
+    min-width: 47px;
+   width: 40%;
+   display: inline-block;
+
+  }
+  #send-box button {
+    width: max-content;
+    display: inline-block;
+    font-size: 12px;
+  }
+  #message-box {
+    
+  }
+  .incomingMessage {
+    margin: 6px 2px;
+    padding: 5px 4px;
+  }
+  .userId {
+    font-weight: bold;
+    border: 3px solid;
+    padding: 4px 8px;
+    background-color: rgb(255, 255, 255);
+  }
 }
