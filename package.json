@@ -1,13 +1,14 @@
 {
   "name": "chatapp",
   "version": "1.0.0",
-  "description": "",
+  "description": "Simple Chat App",
   "main": "index.js",
   "scripts": {
+    "start" : "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": "Sayyed Aaman",
   "license": "ISC",
   "dependencies": {
     "dotenv": "^16.0.3",
