@@ -227,6 +227,7 @@ body {
   .incomingMessage {
     margin: 6px 2px;
     padding: 5px 4px;
+    font-size: 12px;
   }
   .userId {
     font-weight: bold;
